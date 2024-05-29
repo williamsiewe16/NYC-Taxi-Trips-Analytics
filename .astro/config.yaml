@@ -1,0 +1,14 @@
+project:
+  name: example-project
+airflow:
+  image:
+    repository: quay.io/astronomer/astro-runtime
+    tag: 7.0.0
+  dags:
+    mount: true
+  logs:
+    mount: true
+  plugins:
+    mount: true
+  include:
+    mount: true

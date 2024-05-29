@@ -1,0 +1,32 @@
+[0m18:18:06.064780 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fefc8ee9c10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fefc91ea4d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fefc8eea150>]}
+
+
+============================== 18:18:06.067240 | 67bf3800-1af6-4f8b-81bb-ee443a4efeae ==============================
+[0m18:18:06.067240 [info ] [MainThread]: Running with dbt=1.5.0
+[0m18:18:06.069033 [debug] [MainThread]: running dbt with arguments {'use_colors': 'True', 'log_path': 'logs', 'no_print': 'None', 'write_json': 'True', 'quiet': 'False', 'fail_fast': 'False', 'warn_error': 'None', 'use_experimental_parser': 'False', 'profiles_dir': '/home/astro/.dbt', 'introspect': 'True', 'send_anonymous_usage_stats': 'True', 'static_parser': 'True', 'partial_parse': 'True', 'log_format': 'default', 'cache_selected_only': 'False', 'debug': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'log_cache_events': 'False', 'printer_width': '80', 'indirect_selection': 'eager', 'target_path': 'None', 'version_check': 'True'}
+[0m18:18:06.071908 [info ] [MainThread]: dbt version: 1.5.0
+[0m18:18:06.073539 [info ] [MainThread]: python version: 3.11.9
+[0m18:18:06.074982 [info ] [MainThread]: python path: /usr/local/bin/python
+[0m18:18:06.076841 [info ] [MainThread]: os info: Linux-5.15.133.1-microsoft-standard-WSL2-x86_64-with-glibc2.31
+[0m18:18:06.078489 [info ] [MainThread]: Using profiles.yml file at /home/astro/.dbt/profiles.yml
+[0m18:18:06.080018 [info ] [MainThread]: Using dbt_project.yml file at /usr/local/airflow/include/dbt_project.yml
+[0m18:18:06.081798 [info ] [MainThread]: Configuration:
+[0m18:18:06.084160 [info ] [MainThread]:   profiles.yml file [[31mERROR not found[0m]
+[0m18:18:06.086562 [info ] [MainThread]:   dbt_project.yml file [[31mERROR not found[0m]
+[0m18:18:06.088910 [info ] [MainThread]: Required dependencies:
+[0m18:18:06.091211 [debug] [MainThread]: Executing "git --help"
+[0m18:18:06.095134 [info ] [MainThread]:  - git [[31mERROR[0m]
+
+[0m18:18:06.097349 [info ] [MainThread]: [31m2 checks failed:[0m
+[0m18:18:06.099426 [info ] [MainThread]: dbt looked for a profiles.yml file in /home/astro/.dbt/profiles.yml, but did
+not find one. For more information on configuring your profile, consult the
+documentation:
+
+https://docs.getdbt.com/docs/configure-your-profile
+
+
+[0m18:18:06.101513 [info ] [MainThread]: Error from git --help: Could not find command, ensure it is in the user's PATH: "git"
+
+[0m18:18:06.103891 [debug] [MainThread]: Command `dbt debug` failed at 18:18:06.103706 after 0.05 seconds
+[0m18:18:06.105691 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fefc9153110>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fefcd780450>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fefc8fb0910>]}
+[0m18:18:06.108011 [debug] [MainThread]: Flushing usage events

@@ -1,0 +1,7 @@
+version: 2
+sources:
+  - name: snowflake_sources
+    database: dbt_demo
+    schema: sources
+    tables:
+      - name: users
