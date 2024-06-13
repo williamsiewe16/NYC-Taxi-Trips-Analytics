@@ -1,7 +1,7 @@
 version: 2
 sources:
-  - name: snowflake_sources
-    database: dbt_demo
-    schema: sources
+  - name: snowflake_tables
+    database: NYC_TAXI_TRIPS
+    schema: PUBLIC
     tables:
-      - name: users
+      - name: NYC_TAXI_TRIPS_SOURCE
