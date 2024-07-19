@@ -3,7 +3,7 @@ my-snowflake-db:
   outputs:
     dev:
       type: snowflake
-      account: bxedatk-qp94663
+      account: gxenyzd-mk35237
 
       # User/password auth
       user: dbt_test

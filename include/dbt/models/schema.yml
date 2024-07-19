@@ -5,3 +5,4 @@ sources:
     schema: PUBLIC
     tables:
       - name: NYC_TAXI_TRIPS_SOURCE
+      

@@ -11,6 +11,12 @@ import os
 from tqdm import tqdm
 import logging
 
+from include.dbt.cosmos_config import DBT_PROJECT_CONFIG, DBT_CONFIG
+from cosmos.airflow.task_group import DbtTaskGroup
+from cosmos.constants import LoadMode
+from cosmos.config import ProjectConfig, RenderConfig
+
+
 # Configure the logging system
 logging.basicConfig(
     level=logging.INFO,  # Set the logging level to INFO
@@ -190,10 +196,30 @@ def nyc_taxi_trips():
     def get_nyc_trip_sources():
         print("go")
     
+    transform = DbtTaskGroup(
+        group_id='transform',
+        project_config=DBT_PROJECT_CONFIG,
+        profile_config=DBT_CONFIG,
+        render_config=RenderConfig(
+            load_method=LoadMode.DBT_LS,
+            select=['path:models/transform']
+        )
+    )
+
+    report = DbtTaskGroup(
+        group_id='report',
+        project_config=DBT_PROJECT_CONFIG,
+        profile_config=DBT_CONFIG,
+        render_config=RenderConfig(
+            load_method=LoadMode.DBT_LS,
+            select=['path:models/report']
+        )
+    )
 
     chain(
         ingest_raw_data_into_snowflake(),
-        get_nyc_trip_sources()
+        transform,
+        report
     )
 
 # Appeler le dag
