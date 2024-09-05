@@ -1,0 +1,96 @@
+models:
+  - name: dim_dropoff_date
+    columns:
+      - name: DATETIME_ID
+        tests:
+          - unique
+          - not_null
+
+
+  - name: dim_pickup_date
+    columns:
+      - name: DATETIME_ID
+        tests:
+          - unique
+          - not_null
+
+
+  - name: dim_taxi_zone
+    columns:
+      - name: location_id
+        tests:
+          - unique
+          - not_null
+
+      - name: borough
+        tests: 
+          - not_null
+
+      - name: zone
+        tests:
+          - not_null
+  
+
+  - name: dim_rate_code
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null
+
+      - name: name
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Standard rate','JFK','Newark','Nassau or Westchester','Negotiated fare','Group ride']
+
+
+  - name: dim_payment_type
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null
+
+      - name: name
+        tests: 
+          - not_null
+          - accepted_values:
+              values: ['Credit card','Cash','No charge','Dispute','Unknown','Voided trip']
+
+
+  - name: fct_trips
+    columns:
+      - name: vendorid
+        tests:
+          - not_null
+
+      - name: RateCodeID
+        tests:
+          - relationships:
+              to: ref('dim_rate_code')
+              field: id
+
+      - name: Payment_type
+        tests:
+          - relationships:
+              to: ref('dim_payment_type')
+              field: id
+
+      - name: PULocationID
+        tests:
+          - relationships:
+              to: ref('dim_taxi_zone')
+              field: location_id
+
+      - name: DOLocationID
+        tests:
+          - relationships:
+              to: ref('dim_taxi_zone')
+              field: location_id
+
+      - name: STORE_AND_FWD_FLAG
+        tests:
+          - accepted_values:
+              values: ['Y','N']
+          

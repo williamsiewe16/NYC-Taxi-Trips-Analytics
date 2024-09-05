@@ -1,0 +1,4 @@
+SELECT
+    *
+FROM {{ source('snowflake_tables', 'NYC_TAXI_TRIPS_SOURCE') }}
+WHERE TPEP_PICKUP_DATETIME >= TPEP_DROPOFF_DATETIME

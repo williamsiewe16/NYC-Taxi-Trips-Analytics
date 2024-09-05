@@ -1,0 +1,40 @@
+version: 2
+sources:
+  - name: snowflake_tables
+    database: NYC_TAXI_TRIPS
+    schema: PUBLIC
+    tables:
+      - name: NYC_TAXI_TRIPS_SOURCE
+        columns:
+          - name: vendorid
+            tests:
+              - not_null
+
+          - name: RateCodeID
+            tests:
+              - relationships:
+                  to: ref('rate_code')
+                  field: id
+
+          - name: Payment_type
+            tests:
+              - relationships:
+                  to: ref('payment_type')
+                  field: id
+
+          - name: PULocationID
+            tests:
+              - relationships:
+                  to: ref('taxi_zone_lookup')
+                  field: locationid
+
+          - name: DOLocationID
+            tests:
+              - relationships:
+                  to: ref('taxi_zone_lookup')
+                  field: locationid
+
+          - name: tip_amount
+            tests:
+              - accepted_values:
+                  values: ['Y','N']
