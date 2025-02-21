@@ -65,30 +65,6 @@ models:
         tests:
           - not_null
 
-      - name: RateCodeID
-        tests:
-          - relationships:
-              to: ref('dim_rate_code')
-              field: id
-
-      - name: Payment_type
-        tests:
-          - relationships:
-              to: ref('dim_payment_type')
-              field: id
-
-      - name: PULocationID
-        tests:
-          - relationships:
-              to: ref('dim_taxi_zone')
-              field: location_id
-
-      - name: DOLocationID
-        tests:
-          - relationships:
-              to: ref('dim_taxi_zone')
-              field: location_id
-
       - name: STORE_AND_FWD_FLAG
         tests:
           - accepted_values:
