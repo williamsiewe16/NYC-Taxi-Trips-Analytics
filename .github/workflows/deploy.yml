@@ -1,0 +1,27 @@
+name: Run NYC TAXI TRIPS Pipeline
+
+on:
+  push:
+    tags:
+      - "test"
+
+jobs:
+  run-astro-airflow:
+    runs-on: self-hosted  # Utilise ton runner auto-hébergé
+    steps:
+      - name: Vérifier le dépôt
+        uses: actions/checkout@v4
+
+      - name: Démarrer Astro
+        run: astro dev start
+
+      - name: Attendre qu'Airflow soit prêt
+        run: |
+          echo "Attente du démarrage d'Airflow..."
+          sleep 5  # Ajuste si nécessaire
+
+      - name: se connecter au container airflow
+        run: astro dev bash
+       
+      - name: Lancer le DAG nyc_taxi_trips
+        run: airflow dags trigger nyc_taxi_trips
