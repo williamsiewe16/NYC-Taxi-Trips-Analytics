@@ -14,21 +14,35 @@ jobs:
 
       - name: Créer les fichiers config AWS
         run: |
-          set "dirName=./.aws"
-          if not exist "%dirName%" (
-              mkdir "%dirName%"
-              echo Directory created: %dirName%
-  
-              echo "[default]" > %dirName%/config
-              echo "region = $AWS_REGION" >> %dirName%/config
+          $folderPath = ".\.aws"
 
-              echo "[default]" > %dirName%/credentials
-              echo "aws_access_key_id = $AWS_ACCESS_KEY_ID" >> %dirName%/credentials
-              echo "aws_secret_access_key = $AWS_SECRET_ACCESS_KEY" >> %dirName%/credentials
+          if (-Not (Test-Path $folderPath)) {
 
-          ) else (
-              echo Directory already exists: %dirName%
-          )
+            $configFilePath = "$folderPath\config"
+            $configContent = @"
+            [default]
+            region = $AWS_REGION
+            "@
+
+            # Écrire le contenu dans le fichier config
+            $configContent | Set-Content -Path $configFilePath
+            Write-Host "Fichier config créé : $configFilePath"
+
+            # Créer le fichier credentials
+            $credentialsFilePath = "$folderPath\credentials"
+            $credentialsContent = @"
+            [default]
+            aws_access_key_id = $AWS_ACCESS_KEY_ID
+            aws_secret_access_key = $AWS_SECRET_ACCESS_KEY
+            "@
+
+            # Écrire le contenu dans le fichier credentials
+            $credentialsContent | Set-Content -Path $credentialsFilePath
+            Write-Host "Fichier credentials créé : $credentialsFilePath"
+
+          } else {
+              Write-Host "Le dossier existe déjà : $folderPath"
+          }
 
         env:
           AWS_REGION: ${{ secrets.AWS_REGION }}
