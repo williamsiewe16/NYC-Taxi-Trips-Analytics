@@ -12,20 +12,26 @@ jobs:
       - name: Vérifier le dépôt
         uses: actions/checkout@v4
 
-      - name: Créer le fichier AWS config
+      - name: Créer les fichiers config AWS
         run: |
-          mkdir -p ~/.aws
-          echo "[default]" > ~/.aws/config
-          echo "region = $AWS_REGION" >> ~/.aws/config
+          set "dirName=./.aws"
+          if not exist "%dirName%" (
+              mkdir "%dirName%"
+              echo Directory created: %dirName%
+  
+              echo "[default]" > %dirName%/config
+              echo "region = $AWS_REGION" >> %dirName%/config
+
+              echo "[default]" > %dirName%/credentials
+              echo "aws_access_key_id = $AWS_ACCESS_KEY_ID" >> %dirName%/credentials
+              echo "aws_secret_access_key = $AWS_SECRET_ACCESS_KEY" >> %dirName%/credentials
+
+          ) else (
+              echo Directory already exists: %dirName%
+          )
+
         env:
           AWS_REGION: ${{ secrets.AWS_REGION }}
-
-      - name: Créer le fichier AWS credentials
-        run: |
-          echo "[default]" > ~/.aws/credentials
-          echo "aws_access_key_id = $AWS_ACCESS_KEY_ID" >> ~/.aws/credentials
-          echo "aws_secret_access_key = $AWS_SECRET_ACCESS_KEY" >> ~/.aws/credentials
-        env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     
