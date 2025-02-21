@@ -16,7 +16,7 @@ jobs:
         run: |
           mkdir -p ~/.aws
           echo "[default]" > ~/.aws/config
-          echo "region = $AWS_REGION >> ~/.aws/config
+          echo "region = $AWS_REGION" >> ~/.aws/config
         env:
           AWS_REGION: ${{ secrets.AWS_REGION }}
 
